@@ -30,7 +30,7 @@ const checkEndGame = () => {
 
   if (disabledCards.length === 20) {
     clearInterval(this.loop);
-    alert(`Parabéns, ${spanPlayer.innerHTML}! Com: ${cont} tentativas`);
+    alert(`Parabéns, ${spanPlayer.innerHTML}!`);
   }
 
   disabledCards.forEach(disabledCard => {

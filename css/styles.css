@@ -97,6 +97,12 @@ form button {
     transition: 0.5s;
 }
 
+.login__button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: auto;
+  }
+
 form button:hover {
     background-color: aliceblue;
 }

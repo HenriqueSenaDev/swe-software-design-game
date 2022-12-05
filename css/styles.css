@@ -132,23 +132,6 @@ form button:hover {
 
 }
 
-@media (max-width: 500px) {
-    .interactive-image-star img {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        z-index: -1;
-    }
-
-    .interactive-image-rocket img {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        z-index: -1;
-    }
-
-}
-
 @media(min-width: 992px) {
 
     .login-page {

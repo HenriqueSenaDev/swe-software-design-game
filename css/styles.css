@@ -10,11 +10,6 @@ body {
     background: rgba(116, 171, 216, 1);
 }
 
-.login-page {
-    height: 100vh;
-}
-
-
 .logo {
     display: flex;
     justify-content: center;
@@ -160,6 +155,7 @@ form button:hover {
         align-items: center;
         justify-content: center;
         gap: 120px;
+        height: 100vh;
     }
 
     .logo img {

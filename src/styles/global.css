@@ -13,4 +13,5 @@
 
 body {
     @apply bg-[#fffff5];
+    -webkit-font-smoothing: antialiased;
 }

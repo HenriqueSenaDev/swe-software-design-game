@@ -31,7 +31,7 @@ export const Game = () => {
 
       {/* Cards Container */}
       <div className="m-auto p-5 w-full max-w-[1286px] grid max-h-min grid-cols-[repeat(auto-fill,_minmax(124px,_1fr))] gap-4 overflow-y-auto smooth-scrollbar lg:grid-cols-[repeat(auto-fill,_minmax(168px,_1fr))]">
-        {cardDeckData.map(item => <DeckCard />)}
+        {cardDeckData.map(card => <DeckCard key={card.id} data={card} />)}
       </div>
 
       <Button className="flex-shrink-0 max-w-[300px] self-center">

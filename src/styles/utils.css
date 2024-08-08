@@ -1,0 +1,19 @@
+/* width */
+.smooth-scrollbar::-webkit-scrollbar {
+  @apply w-2;
+}
+
+/* Track */
+.smooth-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-200 rounded-md;
+}
+
+/* Handle */
+.smooth-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-md bg-opacity-70;
+}
+
+/* Handle on hover */
+.smooth-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary bg-opacity-80;
+}

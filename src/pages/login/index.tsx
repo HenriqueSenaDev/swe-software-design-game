@@ -34,7 +34,7 @@ export const Login = () => {
 
           <input
             id="team-name"
-            className="w-full h-9 py-1 px-2 rounded-[4px] border-[1px] border-primary outline-none focus-visible:ring-[1px] focus-visible:ring-primary transition-all font-bold text-primary font-[Montserrat] text-sm selection:text-violet-500 selection:bg-blue-200 lg:text-lg lg:h-12"
+            className="w-full h-9 py-1 px-2 rounded-[4px] border-[1px] border-primary outline-none focus-visible:ring-[1px] focus-visible:ring-primary focus-visible:ring-offset-2 transition-all font-bold text-primary font-[Montserrat] text-sm selection:text-violet-500 selection:bg-blue-200 lg:text-lg lg:h-12 lg:focus-visible:ring-2"
             onChange={({ target }) => setTeam(target.value)}
             type="text"
           />

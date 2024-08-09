@@ -5,14 +5,25 @@ import { XIcon } from "lucide-react";
 
 interface DeckCardProps extends ComponentProps<"div"> {
   data: Card;
+  ableToChoose: boolean;
+  toggleCard: (card: Card) => void;
 }
 
-export const DeckCard = ({ data, ...props }: DeckCardProps) => {
-  const [active, setClicked] = useState<boolean>(false);
+export const DeckCard = ({
+  data,
+  ableToChoose,
+  toggleCard,
+  ...props
+}: DeckCardProps) => {
   const [cursor, setCursor] = useState<boolean>(false);
   const [showMore, setShowMore] = useState<boolean>(false);
 
-  const faceClasses = "absolute size-full border-[3px] border-primary bg-white rounded-[10px] flex items-center justify-center transition-all hover:scale-110";
+  const faceClasses = `absolute size-full border-[3px] border-primary bg-white rounded-[10px] flex items-center justify-center transition-all ${data.isMatched ? "" : "hover:scale-110 cursor-pointer"}`;
+
+  const handleClick = () => {
+    if (!ableToChoose || data.isMatched) return;
+    toggleCard(data);
+  }
 
   const handleShowMore: MouseEventHandler = (e) => {
     e.stopPropagation();
@@ -30,7 +41,7 @@ export const DeckCard = ({ data, ...props }: DeckCardProps) => {
                 : "text-primary border-2 border-opacity-60 border-dashed border-primary"
                 }`}>
                 <p className="font-medium">
-                  {data.type == "answer" ? "Pergunta" : "Resposta"}
+                  {data.type == "answer" ? "Resposta" : "Pergunta"}
                 </p>
               </div>
 
@@ -51,13 +62,15 @@ export const DeckCard = ({ data, ...props }: DeckCardProps) => {
       )}
 
       <div
-        className="relative bg-white h-[168px] cursor-pointer lg:h-[124px]"
-        onClick={() => setClicked(prev => !prev)}
+        className="relative bg-white h-[168px] lg:h-[124px]"
+        onClick={handleClick}
         style={{
           transformStyle: "preserve-3d",
-          transform: active ? "rotateY(180deg) scale(1.05)" : "",
+          transform: data.isChosen ? "rotateY(180deg) scale(1.05)" : "",
           perspective: 1000,
           transition: "all ease 0.6s",
+          filter: data.isMatched ? "saturate(0)" : "",
+          opacity: data.isMatched ? "0.7" : "1",
         }}
         {...props}
       >
@@ -73,7 +86,7 @@ export const DeckCard = ({ data, ...props }: DeckCardProps) => {
               : "text-primary border-2 border-opacity-60 border-dashed border-primary"
               }`}>
               <p className="font-medium">
-                {data.type == "answer" ? "Pergunta" : "Resposta"}
+                {data.type == "answer" ? "Resposta" : "Pergunta"}
               </p>
             </div>
 

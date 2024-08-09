@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Card } from "../../types/cards";
 import { cardDeckData } from "../../data/cards";
@@ -7,10 +7,47 @@ import { Button } from "../../components/button";
 
 export const Game = () => {
   const [cardDeck, setCardDeck] = useState<Card[]>(cardDeckData);
-  const chosenId = useRef<string | null>(null);
 
   const [params] = useSearchParams();
   const navigate = useNavigate();
+
+  const chosenCards = useMemo(() =>
+    cardDeck.filter(c => c.isChosen), [cardDeck]);
+
+  const toggleCard = (card: Card) => {
+    setCardDeck(prev => prev.map(item => {
+      if (item.id == card.id) {
+        return { ...item, isChosen: !card.isChosen };
+      }
+      return item;
+    }));
+  }
+
+  const checkCards = () => {
+    const [card1, card2] = chosenCards;
+
+    if (card1.type == card2.type) {
+      alert(`Ambas são ${card1.type == 'answer' ? 'respostas' : 'perguntas'}`);
+      return;
+    }
+
+    if (card1.type != card2.type && card1.match == card2.id) {
+      alert("Cartas batem!");
+
+      setCardDeck(prev => prev.map(item => (
+        chosenCards.some(c => c.id == item.id)
+          ? { ...item, isMatched: true } : item
+      )));
+    }
+    else if (card1.type != card2.type && card1.match != card2.id) {
+      alert("Par incorreto.");
+    }
+
+    setCardDeck(prev => prev.map(item => ({
+      ...item,
+      isChosen: false,
+    })));
+  }
 
   useEffect(() => {
     const player = params.get("player");
@@ -31,10 +68,24 @@ export const Game = () => {
 
       {/* Cards Container */}
       <div className="m-auto p-5 w-full max-w-[1286px] grid max-h-min grid-cols-[repeat(auto-fill,_minmax(124px,_1fr))] gap-4 overflow-y-auto smooth-scrollbar lg:grid-cols-[repeat(auto-fill,_minmax(168px,_1fr))]">
-        {cardDeckData.map(card => <DeckCard key={card.id} data={card} />)}
+        {cardDeck.map(card =>
+          <DeckCard
+            key={card.id}
+            data={card}
+            ableToChoose={
+              chosenCards.length < 2
+              || chosenCards.some(c => c.id == card.id)
+            }
+            toggleCard={toggleCard}
+          />
+        )}
       </div>
 
-      <Button className="flex-shrink-0 max-w-[300px] self-center">
+      <Button
+        className="flex-shrink-0 max-w-[300px] self-center disabled:opacity-40"
+        disabled={chosenCards.length != 2}
+        onClick={checkCards}
+      >
         Testar dupla
       </Button>
     </main>

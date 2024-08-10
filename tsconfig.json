@@ -2,7 +2,8 @@
   "compilerOptions": {
     "jsx": "preserve",
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

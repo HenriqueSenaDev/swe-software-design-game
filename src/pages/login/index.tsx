@@ -1,15 +1,16 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button";
+import { useGame } from "../../hooks/use-game";
 import logo from "../../assets/images/logo.png";
 
 export const Login = () => {
   const [team, setTeam] = useState<string>('');
-  const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent) => {
+  const { handleJoinGame } = useGame();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    navigate(`/game?player=${team}`);
+    handleJoinGame(team);
   }
 
   return (

@@ -1,13 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Card, CardPair } from "../../../../types/cards";
 import { shuffledDeck } from "../../../../data/deck";
 import { Button } from "../../../../components/button";
 import { DeckCard } from "../../../../components/deck-card";
 import { deckLevelMapper } from "./utils/mappers";
+import { GameContext } from "../../../../contexts/game";
 
 export const CardsArea = () => {
   const [level, setLevel] = useState<CardPair["level"]>("easy");
   const [deck, setDeck] = useState<Card[]>(shuffledDeck.easy);
+
+  const { answerQuestion } = useContext(GameContext);
 
   const chosenCards = useMemo(() =>
     deck.filter(c => c.isChosen), [deck]);
@@ -22,10 +25,12 @@ export const CardsArea = () => {
       alert("Par incorreto.");
     }
     else if (card1.type != card2.type && card1.match == card2.id) {
-      setDeck(prev => prev.map(item => (
-        chosenCards.some(c => c.id == item.id)
-          ? { ...item, isMatched: true } : item
-      )));
+      answerQuestion(level, () => {
+        setDeck(prev => prev.map(item => (
+          chosenCards.some(c => c.id == item.id)
+            ? { ...item, isMatched: true } : item
+        )));
+      });
     }
 
     setDeck(prev => prev.map(item => ({

@@ -5,13 +5,13 @@ import { XIcon } from "lucide-react";
 
 interface DeckCardProps extends ComponentProps<"div"> {
   data: Card;
-  ableToChoose: boolean;
+  ableToToggle: boolean;
   toggleCard: (card: Card) => void;
 }
 
 export const DeckCard = ({
   data,
-  ableToChoose,
+  ableToToggle,
   toggleCard,
   ...props
 }: DeckCardProps) => {
@@ -21,7 +21,7 @@ export const DeckCard = ({
   const faceClasses = `absolute size-full border-[3px] border-primary bg-white rounded-[10px] flex items-center justify-center transition-all ${data.isMatched ? "" : "hover:scale-110 cursor-pointer"}`;
 
   const handleClick = () => {
-    if (!ableToChoose || data.isMatched) return;
+    if (!ableToToggle || data.isMatched) return;
     toggleCard(data);
   }
 

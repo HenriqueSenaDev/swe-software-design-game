@@ -21,7 +21,7 @@ export const Game = () => {
           Selecione uma dupla de cartas:
         </h1>
 
-        <p className="text-[#0D0D0D] font-[Montserrat] font-medium text-[22px] max-w-[700px] self-center">
+        <p className="text-[#0D0D0D] font-[Montserrat] font-medium text-lg lg:text-[22px] max-w-[700px] self-center">
           Para ganhar pontos, a dupla de cartas deve corresponder a uma pergunta e sua resposta correta. Boa sorte!
         </p>
       </header>

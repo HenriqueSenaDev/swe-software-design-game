@@ -17,3 +17,9 @@
 .smooth-scrollbar::-webkit-scrollbar-thumb:hover {
   @apply bg-primary bg-opacity-80;
 }
+
+/* hide */
+
+.hide-scollbar::-webkit-scrollbar {
+  @apply w-0;
+}

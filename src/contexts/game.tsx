@@ -36,7 +36,9 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
       const ack: AcknowledgmentResponse = JSON.parse(res);
 
       if (ack.status == "received" && callback) {
+        socket.emit("seeRanking");
         teamRef.current = teamName;
+
         callback(ack);
       }
     });
@@ -67,10 +69,6 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
 
     socket.on("showRanking", (data: Ranking) => {
       setRanking(data);
-    });
-
-    socket.emit("seeRanking", (res: string) => {
-      const ack: AcknowledgmentResponse = JSON.parse(res);
     });
   }, []);
 

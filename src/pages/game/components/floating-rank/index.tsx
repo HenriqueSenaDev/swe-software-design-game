@@ -23,7 +23,7 @@ export const FloatingRank = ({
       </div>
 
       <div
-        className={`absolute flex flex-col gap-3 w-[300px] max-h-[500px] top-0 right-0 bg-white border-2 border-primary border-opacity-50 rounded-md p-3 transition-all ${open ? "" : "translate-x-[1000px]"}`}
+        className={`absolute flex flex-col gap-3 w-[320px] max-h-[500px] top-0 right-0 bg-white border-2 border-primary border-opacity-50 rounded-md p-3 transition-all ${open ? "" : "translate-x-[1000px]"}`}
         onMouseLeave={() => setOpen(false)}
       >
         <div className="border-b-[2px] border-dashed border-primary w-full mb-2">
@@ -32,13 +32,13 @@ export const FloatingRank = ({
           </h3>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 overflow-y-auto hide-scollbar">
           {ranking.map((team, index) => (
             <div
-              key={team.teamName}
-              className="flex gap-3 items-center"
+              key={index}
+              className="flex gap-3 items-center ml-3"
             >
-              <div className="flex items-center justify-center gap-2 bg-primary rounded-md text-white px-[10px] font-[Montserrat] font-bold min-w-[35px] aspect-square bg-opacity-90 text-base">
+              <div className="flex items-center justify-center gap-2 bg-primary rounded-md text-white px-[10px] font-[Montserrat] font-bold min-w-[40px] aspect-square bg-opacity-90 text-sm">
                 {index + 1}º
               </div>
 

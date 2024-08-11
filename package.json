@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "vite --open --port=3000 --host",
+    "dev": "vite --open --port=3002 --host",
     "build": "vite build"
   },
   "keywords": [],

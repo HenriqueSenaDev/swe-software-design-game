@@ -8,6 +8,7 @@ export type Card = {
 }
 
 export type CardPair = {
+  level: "easy" | "medium" | "hard";
   question: string;
   answer: string;
 }

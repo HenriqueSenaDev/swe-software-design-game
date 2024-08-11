@@ -64,6 +64,14 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
     socket.on("connect_error", (error) => {
       console.log(`Erro na conexão: ${error.message}`);
     });
+
+    socket.on("showRanking", (data: Ranking) => {
+      setRanking(data);
+    });
+
+    socket.emit("seeRanking", (res: string) => {
+      const ack: AcknowledgmentResponse = JSON.parse(res);
+    });
   }, []);
 
   return (

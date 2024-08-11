@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CardsArea } from "./components/cards-area";
+import { FloatingRank } from "./components/floating-rank";
 
 export const Game = () => {
   const [params] = useSearchParams();
@@ -13,6 +14,8 @@ export const Game = () => {
 
   return (
     <main className="size-full h-[100vh] flex flex-col py-8 text-center gap-10 lg:gap-16 lg:py-16">
+      <FloatingRank className="max-md:hidden" />
+
       <header className="flex-shrink-0 flex flex-col gap-1 px-5 lg:gap-5">
         <h1 className="text-primary font-[Zain] font-extrabold text-5xl leading-8 lg:text-[80px]">
           Selecione uma dupla de cartas:

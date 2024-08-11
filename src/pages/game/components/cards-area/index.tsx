@@ -1,14 +1,16 @@
-import { useMemo, useState } from "react";
-import { Card } from "../../../../types/cards";
+import { useEffect, useMemo, useState } from "react";
+import { Card, CardPair } from "../../../../types/cards";
 import { shuffledDeck } from "../../../../data/deck";
 import { Button } from "../../../../components/button";
 import { DeckCard } from "../../../../components/deck-card";
+import { deckLevelMapper } from "./utils/mappers";
 
 export const CardsArea = () => {
-  const [cardDeck, setCardDeck] = useState<Card[]>(shuffledDeck.easy);
+  const [level, setLevel] = useState<CardPair["level"]>("easy");
+  const [deck, setDeck] = useState<Card[]>(shuffledDeck.easy);
 
   const chosenCards = useMemo(() =>
-    cardDeck.filter(c => c.isChosen), [cardDeck]);
+    deck.filter(c => c.isChosen), [deck]);
 
   const checkCards = () => {
     const [card1, card2] = chosenCards;
@@ -20,20 +22,20 @@ export const CardsArea = () => {
       alert("Par incorreto.");
     }
     else if (card1.type != card2.type && card1.match == card2.id) {
-      setCardDeck(prev => prev.map(item => (
+      setDeck(prev => prev.map(item => (
         chosenCards.some(c => c.id == item.id)
           ? { ...item, isMatched: true } : item
       )));
     }
 
-    setCardDeck(prev => prev.map(item => ({
+    setDeck(prev => prev.map(item => ({
       ...item,
       isChosen: false,
     })));
   }
 
   const toggleCard = (card: Card) => {
-    setCardDeck(prev => prev.map(item => {
+    setDeck(prev => prev.map(item => {
       if (item.id == card.id) {
         return { ...item, isChosen: !card.isChosen };
       }
@@ -41,23 +43,46 @@ export const CardsArea = () => {
     }));
   }
 
-  return (
-    <>
-      <div className="m-auto p-5 w-full max-w-[1286px] grid max-h-min grid-cols-[repeat(auto-fill,_minmax(124px,_1fr))] gap-4 overflow-y-auto smooth-scrollbar lg:grid-cols-[repeat(auto-fill,_minmax(168px,_1fr))]">
-        {cardDeck.map(card => {
-          const ableToToggle = chosenCards.length < 2
-            || chosenCards.some(c => c.id == card.id);
+  useEffect(() => {
+    const hasRemaining = deck.some(c => !c.isMatched);
+    if (hasRemaining) return;
 
-          return (
-            <DeckCard
-              key={card.id}
-              data={card}
-              ableToToggle={ableToToggle}
-              toggleCard={toggleCard}
-            />
-          );
-        }
-        )}
+    if (level == "easy") {
+      setLevel("medium");
+      setDeck(shuffledDeck.medium);
+    }
+    else if (level == "medium") {
+      setLevel("hard");
+      setDeck(shuffledDeck.hard);
+    }
+    else {
+      alert("Você ganhou!");
+    }
+  }, [deck]);
+
+  return (
+    <div className="flex flex-col gap-10">
+      <div>
+        <h1 className="capitalize text-primary font-medium font-[Zain] text-3xl">
+          {deckLevelMapper[level]}
+        </h1>
+
+        <div className="m-auto p-5 w-full max-w-[1286px] grid max-h-min grid-cols-[repeat(auto-fill,_minmax(124px,_1fr))] gap-4 overflow-y-auto smooth-scrollbar lg:grid-cols-[repeat(auto-fill,_minmax(168px,_1fr))]">
+          {deck.map(card => {
+            const ableToToggle = chosenCards.length < 2
+              || chosenCards.some(c => c.id == card.id);
+
+            return (
+              <DeckCard
+                key={card.id}
+                data={card}
+                ableToToggle={ableToToggle}
+                toggleCard={toggleCard}
+              />
+            );
+          }
+          )}
+        </div>
       </div>
 
       <Button
@@ -67,6 +92,6 @@ export const CardsArea = () => {
       >
         Testar dupla
       </Button>
-    </>
+    </div>
   );
 }

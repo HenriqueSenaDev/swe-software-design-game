@@ -1,8 +1,16 @@
-import { createContext, ReactNode, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Ranking } from "../types/game";
 import { AcknowledgmentResponse } from "../types/libs/socket";
 import { socket } from "../lib/socket-io";
 import { CardPair } from "../types/cards";
+import { AppContext } from "./app";
 
 export type MatchStatus = "pending" | "active" | "ended";
 
@@ -31,7 +39,9 @@ export type GameContextProviderProps = {
 export const GameContextProvider = ({ children }: GameContextProviderProps) => {
   const [matchStatus, setMatchStatus] = useState<MatchStatus>("pending");
   const [ranking, setRanking] = useState<Ranking>([]);
+
   const teamRef = useRef<string>();
+  const { setMessage } = useContext(AppContext);
 
   const handleJoinGame: GameContextReturnValue["handleJoinGame"] = (
     teamName,
@@ -40,7 +50,10 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
     socket.emit("joinGame", { teamName }, (res: string) => {
       const ack: AcknowledgmentResponse = JSON.parse(res);
 
-      if (ack.status == "received" && callback) {
+      if (ack.status == "error") {
+        setMessage(ack.event);
+      }
+      else if (ack.status == "received" && callback) {
         socket.emit("seeRanking");
         teamRef.current = teamName;
 

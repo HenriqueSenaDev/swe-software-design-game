@@ -6,12 +6,15 @@ import { DeckCard } from "../../../../components/deck-card";
 import { deckLevelMapper } from "./utils/mappers";
 import { GameContext } from "../../../../contexts/game";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../../../contexts/app";
 
 export const CardsArea = () => {
   const [level, setLevel] = useState<CardPair["level"]>("easy");
   const [deck, setDeck] = useState<Card[]>(shuffledDeck.easy);
 
   const { matchStatus, answerQuestion, endGame } = useContext(GameContext);
+  const { setMessage } = useContext(AppContext);
+
   const navigate = useNavigate();
 
   const chosenCards = useMemo(() =>
@@ -21,10 +24,10 @@ export const CardsArea = () => {
     const [card1, card2] = chosenCards;
 
     if (card1.type == card2.type) {
-      alert(`Ambas são ${card1.type == 'answer' ? 'respostas' : 'perguntas'}`);
+      setMessage(`Ambas são ${card1.type == 'answer' ? 'respostas' : 'perguntas'}`);
     }
     else if (card1.type != card2.type && card1.match != card2.id) {
-      alert("Par incorreto.");
+      setMessage("Par incorreto.");
     }
     else if (card1.type != card2.type && card1.match == card2.id) {
       answerQuestion(level, () => {

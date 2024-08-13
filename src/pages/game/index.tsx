@@ -1,15 +1,18 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CardsArea } from "./components/cards-area";
 import { FloatingRank } from "./components/floating-rank";
+import { GameContext } from "../../contexts/game";
 
 export const Game = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
 
+  const { matchStatus } = useContext(GameContext);
+
   useEffect(() => {
     const player = params.get("player");
-    if (!player) navigate("/");
+    if (!player || matchStatus !== "active") navigate("/");
   }, [params]);
 
   return (

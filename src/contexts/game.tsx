@@ -4,9 +4,11 @@ import { AcknowledgmentResponse } from "../types/libs/socket";
 import { socket } from "../lib/socket-io";
 import { CardPair } from "../types/cards";
 
+export type MatchStatus = "pending" | "active" | "ended";
+
 export type GameContextReturnValue = {
   ranking: Ranking;
-  isMatchAvailable: boolean;
+  matchStatus: MatchStatus;
   handleJoinGame: (
     teamName: string,
     callback?: (ack: AcknowledgmentResponse) => void,
@@ -15,6 +17,7 @@ export type GameContextReturnValue = {
     difficulty: CardPair["level"],
     callback?: (ack: AcknowledgmentResponse) => void,
   ) => void;
+  endGame: (callback?: (ack: AcknowledgmentResponse) => void) => void;
 }
 
 export const GameContext = createContext<GameContextReturnValue>(
@@ -22,11 +25,11 @@ export const GameContext = createContext<GameContextReturnValue>(
 );
 
 export type GameContextProviderProps = {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const GameContextProvider = ({ children }: GameContextProviderProps) => {
-  const [isMatchAvailable, setIsMatchAvailable] = useState<boolean>(false);
+  const [matchStatus, setMatchStatus] = useState<MatchStatus>("pending");
   const [ranking, setRanking] = useState<Ranking>([]);
   const teamRef = useRef<string>();
 
@@ -64,26 +67,43 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
     });
   }
 
+  const endGame: GameContextReturnValue["endGame"] = (
+    callback,
+  ) => {
+    socket.emit("endGame", (res: string) => {
+      const ack: AcknowledgmentResponse = JSON.parse(res);
+
+      if (ack.status == "received" && callback) {
+        callback(ack);
+      }
+    });
+  }
+
   useEffect(() => {
     socket.on("connect_error", (error) => {
       console.log(`Erro na conexão: ${error.message}`);
     });
 
     socket.on("availableMatch", (hasMatchOnServer: boolean) => {
-      setIsMatchAvailable(hasMatchOnServer);
+      if (hasMatchOnServer) setMatchStatus("active");
     });
 
     socket.on("showRanking", (data: Ranking) => {
       setRanking(data);
     });
+
+    socket.on("gameEnded", () => {
+      setMatchStatus("ended");
+    });
   }, []);
 
   return (
     <GameContext.Provider value={{
-      isMatchAvailable,
+      matchStatus,
       ranking,
       handleJoinGame,
       answerQuestion,
+      endGame,
     }}>
       {children}
     </GameContext.Provider>

@@ -5,12 +5,14 @@ import { Button } from "../../../../components/button";
 import { DeckCard } from "../../../../components/deck-card";
 import { deckLevelMapper } from "./utils/mappers";
 import { GameContext } from "../../../../contexts/game";
+import { useNavigate } from "react-router-dom";
 
 export const CardsArea = () => {
   const [level, setLevel] = useState<CardPair["level"]>("easy");
   const [deck, setDeck] = useState<Card[]>(shuffledDeck.easy);
 
-  const { answerQuestion } = useContext(GameContext);
+  const { matchStatus, answerQuestion, endGame } = useContext(GameContext);
+  const navigate = useNavigate();
 
   const chosenCards = useMemo(() =>
     deck.filter(c => c.isChosen), [deck]);
@@ -61,9 +63,15 @@ export const CardsArea = () => {
       setDeck(shuffledDeck.hard);
     }
     else {
-      alert("Você ganhou!");
+      endGame();
     }
   }, [deck]);
+
+  useEffect(() => {
+    if (matchStatus === "ended") {
+      navigate("/result");
+    }
+  }, [matchStatus]);
 
   return (
     <div className="flex flex-col gap-10">

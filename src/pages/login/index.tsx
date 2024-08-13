@@ -8,7 +8,7 @@ export const Login = () => {
   const [team, setTeam] = useState<string>('');
   const navigate = useNavigate();
 
-  const { handleJoinGame } = useContext(GameContext);
+  const { isMatchAvailable, handleJoinGame } = useContext(GameContext);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -43,9 +43,21 @@ export const Login = () => {
           />
         </div>
 
-        <Button className="max-w-[232px] mx-auto" type="submit">
-          Jogar
-        </Button>
+        <div className="w-full max-w-[232px] mx-auto">
+          <Button
+            className="disabled:opacity-40"
+            type="submit"
+            disabled={!isMatchAvailable}
+          >
+            Jogar
+          </Button>
+
+          {!isMatchAvailable && (
+            <p className="mt-2 text-[#0D0D0D] font-[Montserrat] font-medium">
+              Aguarde a partida iniciar...
+            </p>
+          )}
+        </div>
       </form>
     </div>
   );

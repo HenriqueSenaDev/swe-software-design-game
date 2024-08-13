@@ -6,6 +6,7 @@ import { CardPair } from "../types/cards";
 
 export type GameContextReturnValue = {
   ranking: Ranking;
+  isMatchAvailable: boolean;
   handleJoinGame: (
     teamName: string,
     callback?: (ack: AcknowledgmentResponse) => void,
@@ -25,6 +26,7 @@ export type GameContextProviderProps = {
 }
 
 export const GameContextProvider = ({ children }: GameContextProviderProps) => {
+  const [isMatchAvailable, setIsMatchAvailable] = useState<boolean>(false);
   const [ranking, setRanking] = useState<Ranking>([]);
   const teamRef = useRef<string>();
 
@@ -67,6 +69,10 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
       console.log(`Erro na conexão: ${error.message}`);
     });
 
+    socket.on("availableMatch", (hasMatchOnServer: boolean) => {
+      setIsMatchAvailable(hasMatchOnServer);
+    });
+
     socket.on("showRanking", (data: Ranking) => {
       setRanking(data);
     });
@@ -74,6 +80,7 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
 
   return (
     <GameContext.Provider value={{
+      isMatchAvailable,
       ranking,
       handleJoinGame,
       answerQuestion,

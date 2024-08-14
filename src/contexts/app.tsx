@@ -14,7 +14,7 @@ export type AppContextProviderProps = {
 }
 
 export const AppContextProvider = ({ children }: AppContextProviderProps) => {
-  const [message, setMessage] = useState<string | null>("Teste");
+  const [message, setMessage] = useState<string | null>(null);
 
   return (
     <AppContext.Provider value={{

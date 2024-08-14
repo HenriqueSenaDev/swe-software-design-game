@@ -17,6 +17,7 @@ export type MatchStatus = "pending" | "active" | "ended";
 export type GameContextReturnValue = {
   ranking: Ranking;
   matchStatus: MatchStatus;
+  teamName: string | undefined;
   handleJoinGame: (
     teamName: string,
     callback?: (ack: AcknowledgmentResponse) => void,
@@ -112,6 +113,7 @@ export const GameContextProvider = ({ children }: GameContextProviderProps) => {
 
   return (
     <GameContext.Provider value={{
+      teamName: teamRef.current,
       matchStatus,
       ranking,
       handleJoinGame,

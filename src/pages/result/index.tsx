@@ -1,11 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GameContext } from "../../contexts/game";
 import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
+import {
+  playDefeatSoundEffect,
+  playVictorySoundEffect,
+} from "../../utils/sound-effects";
 
 export const Result = () => {
-  const { ranking } = useContext(GameContext);
-  const { width, height } = useWindowSize()
+  const { ranking, teamName } = useContext(GameContext);
+  const { width, height } = useWindowSize();
+
+  useEffect(() => {
+    ranking[0].teamName == teamName
+      ? playVictorySoundEffect()
+      : playDefeatSoundEffect();
+  }, []);
 
   return (
     <main className="size-full h-[100vh] flex flex-col py-8 text-center gap-10 lg:gap-16 lg:py-16">

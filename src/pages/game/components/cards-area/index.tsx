@@ -7,7 +7,7 @@ import { deckLevelMapper } from "./utils/mappers";
 import { GameContext } from "../../../../contexts/game";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../../contexts/app";
-import { playPairMatchSoundEffect } from "../../../../utils/sound-effects";
+import { pairMatchSoundEffect } from "../../../../utils/sound-effects";
 
 export const CardsArea = () => {
   const [level, setLevel] = useState<CardPair["level"]>("easy");
@@ -32,14 +32,14 @@ export const CardsArea = () => {
       setMessage("Par incorreto.");
     }
     else if (card1.type != card2.type && card1.match == card2.id) {
-      playPairMatchSoundEffect();
-
       answerQuestion(level, () => {
         setDeck(prev => prev.map(item => (
           chosenCards.some(c => c.id == item.id)
             ? { ...item, isMatched: true } : item
         )));
       });
+
+      pairMatchSoundEffect.play();
     }
 
     setDeck(prev => prev.map(item => ({

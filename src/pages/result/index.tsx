@@ -3,8 +3,8 @@ import { GameContext } from "../../contexts/game";
 import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
 import {
-  playDefeatSoundEffect,
-  playVictorySoundEffect,
+  defeatSoundEffect,
+  victorySoundEffect,
 } from "../../utils/sound-effects";
 
 export const Result = () => {
@@ -13,8 +13,8 @@ export const Result = () => {
 
   useEffect(() => {
     ranking[0].teamName == teamName
-      ? playVictorySoundEffect()
-      : playDefeatSoundEffect();
+      ? victorySoundEffect.play()
+      : defeatSoundEffect.play();
   }, []);
 
   return (
@@ -33,7 +33,7 @@ export const Result = () => {
         </h1>
 
         <p className="text-[#0D0D0D] font-[Montserrat] font-medium text-lg lg:text-[22px] max-w-[700px] self-center">
-          Agradecemos a colaboração de todos! Se não conseguiram dessa vez, boa sorte nas próximas tenativas.
+          Agradecemos a colaboração de todos! Se não conseguiram dessa vez, boa sorte nas próximas tentativas.
         </p>
       </header>
 

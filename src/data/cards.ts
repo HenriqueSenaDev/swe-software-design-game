@@ -2,138 +2,158 @@ import { CardPair } from "../types/cards";
 
 export const cardPairs: CardPair[] = [
   {
-    level: "easy",
+    question: "O que é projeto de software?",
+    answer: "Lugar em que a qualidade do software é estabelecido / É a criação de soluções para problemas, dividindo o sistema em partes menores e independentes.",
+    level: "easy"
+  },
+  {
     question: "O que é a decomposição no projeto de software?",
-    answer: "Dividir um problema complexo em partes menores e independentes."
+    answer: "Dividir um problema complexo em partes menores e independentes.",
+    level: "easy"
   },
   {
-    level: "easy",
+    question: "Notação gráfica utilizada para representar modelos de software:",
+    answer: "UML",
+    level: "easy"
+  },
+  {
+    question: "O que significa UML?",
+    answer: "Unified Modeling Language",
+    level: "easy"
+  },
+  {
+    question: "É um modelo de projeto:",
+    answer: "Projeto arquitetural",
+    level: "easy"
+  },
+  {
+    question: "Qual visão descreve a funcionalidade do sistema como um todo?",
+    answer: "Visão de projeto",
+    level: "easy"
+  },
+  {
+    question: "Qual visão descreve a escalabilidade e desempenho do sistema?",
+    answer: "Visão de processo",
+    level: "easy"
+  },
+  {
+    question: "É um padrão de arquitetura de software que divide uma aplicação em 3 componentes principais:",
+    answer: "MVC (Model-View-Controller)",
+    level: "easy"
+  },
+  {
+    question: "Qual diagrama representa o fluxo de trabalho ou o processo dentro de um sistema?",
+    answer: "Diagrama de atividades",
+    level: "easy"
+  },
+  // {
+  //   question: "Na ausência do projeto de software pode ocorrer...",
+  //   answer: "Sistema instável, difícil de testar",
+  //   level: "easy"
+  // },
+  {
     question: "Como a abstração ajuda no projeto de software?",
-    answer: "Simplifica o uso de partes complexas do sistema."
+    answer: "Simplifica o uso de partes complexas do sistema.",
+    level: "medium"
   },
   {
-    level: "easy",
-    question: "Por que a integridade conceitual é importante?",
-    answer: "Garante a coerência e consistência no sistema."
-  },
-  {
-    level: "easy",
-    question: "O que é a integridade conceitual?",
-    answer: "Coerência e consistência nas funcionalidades e interfaces de um sistema."
-  },
-  {
-    level: "easy",
-    question: "Qual é a vantagem do ocultamento de informação?",
-    answer: "Facilita desenvolvimento paralelo e manutenção."
-  },
-  {
-    level: "easy",
-    question: "O que é um acoplamento ruim?",
-    answer: "Dependência forte entre classes que dificulta mudanças."
-  },
-  {
-    level: "easy",
-    question: "Qual é a vantagem de ter interfaces pequenas?",
-    answer: "Elas são mais fáceis de entender e implementar corretamente."
-  },
-  {
-    level: "easy",
-    question: "Como uma boa integridade conceitual ajuda?",
-    answer: "Melhora a usabilidade e compreensão do sistema."
-  },
-  {
-    level: "easy",
-    question: "Qual é o benefício do ocultamento de informação?",
-    answer: "Facilita mudanças e desenvolvimento paralelo."
-  },
-  {
-    level: "medium",
     question: "O que significa uma classe ser coesa no projeto de software?",
-    answer: "A classe deve ter um único propósito ou função."
+    answer: "A classe deve ter um único propósito ou função.",
+    level: "medium"
   },
   {
-    level: "medium",
-    question: "O que define o Princípio da Responsabilidade Única?",
-    answer: "Cada classe deve ter uma única razão para ser modificada."
-  },
-  {
-    level: "medium",
-    question: "O que é o Princípio da Segregação de Interfaces?",
-    answer: "Interfaces devem ser específicas e não carregar métodos desnecessários."
-  },
-  {
-    level: "medium",
-    question: "Como o Princípio de Demeter pode simplificar o código?",
-    answer: "Reduz a dependência entre objetos, tornando o código mais modular."
-  },
-  {
-    level: "medium",
-    question: "O que o Princípio de Inversão de Dependências sugere?",
-    answer: "Depende de abstrações, não de implementações concretas."
-  },
-  {
-    level: "medium",
     question: "Quais são os instrumentos oferecidos por linguagens de programação para a criação de abstrações?",
-    answer: "Funções, classes, interfaces, pacotes e bibliotecas."
+    answer: "Funções, classes, interfaces, pacotes e bibliotecas.",
+    level: "medium"
   },
   {
-    level: "medium",
     question: "Por que a decomposição de um problema é importante na Engenharia de Software?",
-    answer: "Porque ajuda a combater a complexidade dos sistemas modernos de software."
+    answer: "Porque ajuda a combater a complexidade dos sistemas modernos de software.",
+    level: "medium"
   },
   {
-    level: "medium",
     question: "Quais são os três objetivos principais no projeto de software?",
-    answer: "Decompor o problema, implementar independentemente, criar abstrações."
+    answer: "Decompor o problema, implementar independentemente, criar abstrações.",
+    level: "medium"
   },
   {
-    level: "medium",
-    question: "O que o analisador léxico faz?",
-    answer: "O analisador léxico lê o arquivo de entrada e divide-o em tokens (como if, for, while, x, +, etc.)."
-  },
-  {
-    level: "hard",
-    question: "Qual é a principal vantagem do padrão Adapter?",
-    answer: "Permite que sistemas com interfaces diferentes interajam."
-  },
-  {
-    level: "hard",
-    question: "O que faz o padrão Iterador?",
-    answer: "Padroniza a navegação sobre uma estrutura de dados."
-  },
-  {
-    level: "hard",
-    question: "Qual é a função principal do Singleton?",
-    answer: "Garante uma única instância de uma classe."
-  },
-  {
-    level: "hard",
-    question: "O que faz o padrão Fábrica?",
-    answer: "Encapsula a criação de objetos."
-  },
-  {
-    level: "hard",
-    question: "Quando não usar o padrão Fábrica?",
-    answer: "Se não for necessário criar objetos de tipos diferentes."
-  },
-  {
-    level: "hard",
-    question: "O que faz o padrão Fachada?",
-    answer: "Fornece uma interface simplificada para um subsistema."
-  },
-  {
-    level: "hard",
-    question: "O que é um Proxy?",
-    answer: "Representa ou substitui um objeto real."
-  },
-  {
-    level: "hard",
     question: "Como medir a coesão de uma classe?",
-    answer: "Olhe se a classe realiza uma única função bem."
+    answer: "Olhe se realiza uma única função bem.",
+    level: "medium"
   },
   {
-    level: "hard",
-    question: "O que faz o padrão Decorador?",
-    answer: "Adiciona funcionalidades a um objeto dinamicamente."
+    question: "Qual a ideia do Princípio da Segregação de Interfaces?",
+    answer: "Devem ser específicas e não carregar métodos desnecessários.",
+    level: "medium"
   },
-];
+  {
+    question: "Como o Princípio Aberto/Fechado pode ser implementado?",
+    answer: "Usando herança e padrões de projeto para permitir extensões sem modificar o código existente.",
+    level: "medium"
+  },
+  {
+    question: "Interface de usuário, gerenciamento de interface e apoio de sistema fazem parte de qual arquitetura?",
+    answer: "Camadas",
+    level: "medium"
+  },
+  // {
+  //   question: "Qual diagrama descreve a estrutura estática de um sistema, como classes, atributos, métodos etc?",
+  //   answer: "Diagrama de classes",
+  //   level: "medium"
+  // },
+  {
+    question: "Quando a herança é menos recomendada?",
+    answer: "Quando se pode criar uma dependência rígida e difícil de gerenciar.",
+    level: "hard"
+  },
+  {
+    question: "Qual é a função principal do padrão Proxy?",
+    answer: "Controla o acesso ao objeto real.",
+    level: "hard"
+  },
+  {
+    question: "Por que preferir composição a herança?",
+    answer: "É mais flexível e menos propensa a problemas.",
+    level: "hard"
+  },
+  {
+    question: "O que diferencia o padrão Proxy do padrão Decorador?",
+    answer: "Controla o acesso ao objeto e o outro adiciona funcionalidades.",
+    level: "hard"
+  },
+  {
+    question: "O que é o padrão Visitor?",
+    answer: "Adiciona operações a estruturas de dados sem modificar as classes.",
+    level: "hard"
+  },
+  {
+    question: "O que o padrão Strategy permite?",
+    answer: "Alternar algoritmos de forma flexível.",
+    level: "hard"
+  },
+  {
+    question: "O que faz o padrão Fábrica?",
+    answer: "Encapsula a criação de objetos.",
+    level: "hard"
+  },
+  {
+    question: "Quando não usar o padrão Fábrica?",
+    answer: "Se não for necessário criar objetos de tipos diferentes.",
+    level: "hard"
+  },
+  {
+    question: "Qual é a principal vantagem do padrão Adapter?",
+    answer: "Permite que sistemas com interfaces diferentes interajam.",
+    level: "hard"
+  },
+  // {
+  //   question: "O que faz o padrão Iterador?",
+  //   answer: "Padroniza a navegação sobre uma estrutura de dados.",
+  //   level: "hard"
+  // },
+  // {
+  //   question: "O que o analisador léxico faz?",
+  //   answer: "Lê o arquivo de entrada e divide-o em tokens (como if, for, while, x, +, etc.)",
+  //   level: "hard"
+  // }
+]

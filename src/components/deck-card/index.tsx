@@ -2,6 +2,7 @@ import { ComponentProps, MouseEventHandler, useState } from "react";
 import { Card } from "../../types/cards";
 import interrogativeIcon from "../../assets/vectors/interrogative-icon.svg";
 import { XIcon } from "lucide-react";
+import { useWindowSize } from "react-use";
 
 interface DeckCardProps extends ComponentProps<"div"> {
   data: Card;
@@ -17,6 +18,8 @@ export const DeckCard = ({
 }: DeckCardProps) => {
   const [cursor, setCursor] = useState<boolean>(false);
   const [showMore, setShowMore] = useState<boolean>(false);
+
+  const { width } = useWindowSize();
 
   const faceClasses = `absolute size-full border-[3px] border-primary bg-white rounded-[10px] flex items-center justify-center transition-all ${data.isMatched ? "" : "hover:scale-110 cursor-pointer"}`;
 
@@ -90,16 +93,18 @@ export const DeckCard = ({
               </p>
             </div>
 
-            <div className="my-auto">
-              {cursor ? (
+            <div className="my-auto flex flex-col-reverse gap-3 lg:flex-col">
+              {(width < 1024 || (width >= 1024 && cursor)) && (
                 <p
                   className="text-primary font-bold text-base underline transition-all hover:opacity-80"
                   onClick={handleShowMore}
                 >
                   Ver mais
                 </p>
-              ) : (
-                <p className="line-clamp-2 text-left text-primary font-bold text-sm">
+              )}
+
+              {(width < 1024 || (!cursor && width >= 1024)) && (
+                <p className="line-clamp-2 text-left text-primary font-bold text-sm lg:line-clamp-2">
                   {data.content}
                 </p>
               )}

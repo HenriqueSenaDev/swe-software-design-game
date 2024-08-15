@@ -16,7 +16,7 @@ export const Game = () => {
   }, [params]);
 
   return (
-    <main className="size-full h-[100vh] flex flex-col py-8 text-center gap-10 lg:gap-16 lg:py-16">
+    <main className="size-full min-h-[100vh] flex flex-col py-8 text-center gap-10 lg:gap-16 lg:py-16">
       <FloatingRank className="max-md:hidden" />
 
       <header className="flex-shrink-0 flex flex-col gap-1 px-5 lg:gap-5">

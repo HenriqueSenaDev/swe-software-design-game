@@ -8,7 +8,7 @@ interface FeedbackProps {
 export const Feedback = ({ message, cleanMessage }: FeedbackProps) => {
   return (
     <div
-      className="flex items-center justify-between fixed bg-primary py-3 px-5 w-[90%] top-10 max-w-lg transition-all rounded-lg left-1/2 -translate-x-1/2"
+      className="flex z-50 items-center justify-between fixed bg-primary py-3 px-5 w-[90%] top-10 max-w-lg transition-all rounded-lg left-1/2 -translate-x-1/2"
       style={{
         transform: message ? "" : "translateY(-200px) translateX(-50%)",
       }}

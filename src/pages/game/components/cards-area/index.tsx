@@ -8,6 +8,7 @@ import { GameContext } from "../../../../contexts/game";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../../contexts/app";
 import { pairMatchSoundEffect } from "../../../../utils/sound-effects";
+import { FloatingRank } from "../floating-rank";
 
 export const CardsArea = () => {
   const [level, setLevel] = useState<CardPair["level"]>("easy");
@@ -81,7 +82,9 @@ export const CardsArea = () => {
   }, [matchStatus]);
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="relative flex flex-col gap-10">
+      <FloatingRank className="max-lg:-top-4 max-lg:right-4 max-lg:absolute lg:hidden" />
+
       <div>
         <h1 className="capitalize text-primary font-medium font-[Zain] text-3xl">
           {deckLevelMapper[level]}

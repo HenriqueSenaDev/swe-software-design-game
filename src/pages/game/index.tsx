@@ -15,6 +15,13 @@ export const Game = () => {
     if (!player || matchStatus !== "active") navigate("/");
   }, [params]);
 
+  useEffect(() => {
+    window.addEventListener("beforeunload", function (event) {
+      event.preventDefault();
+      event.returnValue = '';
+    });
+  }, []);
+
   return (
     <main className="size-full min-h-[100vh] flex flex-col py-8 text-center gap-10 lg:gap-16 lg:py-16">
       <FloatingRank className="max-md:hidden" />

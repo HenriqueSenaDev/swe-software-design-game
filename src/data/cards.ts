@@ -12,8 +12,8 @@ export const cardPairs: CardPair[] = [
     level: "easy"
   },
   {
-    question: "Notação gráfica utilizada para representar modelos de software:",
-    answer: "UML",
+    question: "O que é uma interface provida em um sistema de software?",
+    answer: "É o conjunto de serviços ou métodos que uma unidade de código (como uma classe) disponibiliza para o restante do sistema.",
     level: "easy"
   },
   {
@@ -46,11 +46,6 @@ export const cardPairs: CardPair[] = [
     answer: "Diagrama de atividades",
     level: "easy"
   },
-  // {
-  //   question: "Na ausência do projeto de software pode ocorrer...",
-  //   answer: "Sistema instável, difícil de testar",
-  //   level: "easy"
-  // },
   {
     question: "Como a abstração ajuda no projeto de software?",
     answer: "Simplifica o uso de partes complexas do sistema.",
@@ -96,11 +91,6 @@ export const cardPairs: CardPair[] = [
     answer: "Camadas",
     level: "medium"
   },
-  // {
-  //   question: "Qual diagrama descreve a estrutura estática de um sistema, como classes, atributos, métodos etc?",
-  //   answer: "Diagrama de classes",
-  //   level: "medium"
-  // },
   {
     question: "Quando a herança é menos recomendada?",
     answer: "Quando se pode criar uma dependência rígida e difícil de gerenciar.",
@@ -146,14 +136,25 @@ export const cardPairs: CardPair[] = [
     answer: "Permite que sistemas com interfaces diferentes interajam.",
     level: "hard"
   },
-  // {
-  //   question: "O que faz o padrão Iterador?",
-  //   answer: "Padroniza a navegação sobre uma estrutura de dados.",
-  //   level: "hard"
-  // },
-  // {
-  //   question: "O que o analisador léxico faz?",
-  //   answer: "Lê o arquivo de entrada e divide-o em tokens (como if, for, while, x, +, etc.)",
-  //   level: "hard"
-  // }
 ]
+
+// {
+//   question: "Na ausência do projeto de software pode ocorrer...",
+//   answer: "Sistema instável, difícil de testar",
+//   level: "easy"
+// },
+// {
+//   question: "Qual diagrama descreve a estrutura estática de um sistema, como classes, atributos, métodos etc?",
+//   answer: "Diagrama de classes",
+//   level: "medium"
+// },
+// {
+//   question: "O que faz o padrão Iterador?",
+//   answer: "Padroniza a navegação sobre uma estrutura de dados.",
+//   level: "hard"
+// },
+// {
+//   question: "O que o analisador léxico faz?",
+//   answer: "Lê o arquivo de entrada e divide-o em tokens (como if, for, while, x, +, etc.)",
+//   level: "hard"
+// }
